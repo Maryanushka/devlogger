@@ -1,7 +1,7 @@
 <ul class="list-group">
-	<li class="list-group-item justify-content-between d-flex align-items-center">
-		<a href="#">Cras justo odio</a>
-		<span class="log-date">12.12.1234</span>
+	<li *ngFor="let log of logs" class="list-group-item justify-content-between d-flex align-items-center">
+		<a href="#">{{ log.text }}</a>
+		<span class="log-date">{{ log.date | date: 'short' }}</span>
 		<i class="fa fa-times"></i>
 	</li>
 </ul>

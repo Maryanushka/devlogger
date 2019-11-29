@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Log } from '../../models/Log';
+import { LogService } from '../../services/log.service';
 
 @Component({
   selector: 'app-logs',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./logs.component.scss']
 })
 export class LogsComponent implements OnInit {
+	logs: Log[];
 
-  constructor() { }
+  constructor(private logServise: LogService) { }
 
   ngOnInit() {
-  }
+		this.logs = this.logServise.getLog();
+	}
+		
 
 }
