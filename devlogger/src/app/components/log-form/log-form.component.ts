@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Log } from '../../models/Log';
 import { LogService } from '../../services/log.service';
 import { DH_NOT_SUITABLE_GENERATOR } from 'constants';
+import { IfStmt } from '@angular/compiler';
 
 
 @Component({
@@ -37,26 +38,25 @@ export class LogFormComponent implements OnInit {
 
 		// check if new log 
 		if(this.isNew){
-
-			// create a new log 
-			let newLog = {
-				id: this.generateId(),
-				text: this.text,
-				date: new Date()
-			}
-			// add log 
-			this.logServise.addLog(newLog);
+			this.createNewLog();
 		}
 		else {
 			// create a log to be updated
-			let updLog = {
-				id: this.id,
-				text: this.text,
-				date: new Date()
+			if(this.id != ''){
 
+				let updLog = {
+					id: this.id,
+					text: this.text,
+					date: new Date()
+
+				}
+				// update log 
+				this.logServise.updateLog(updLog);
 			}
-			// update log 
-			this.logServise.updateLog(updLog);
+			else {
+				this.createNewLog();
+			}
+
 		}
 
 		this.clearState();
@@ -78,6 +78,25 @@ export class LogFormComponent implements OnInit {
 			var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
 			return v.toString(16);
 		});
+	}
+
+	createNewLog (){
+		// this.isNew = true;
+		let uniqueId = this.generateId();
+		if (uniqueId.length > 0) {
+			// create a new log 
+			let newLog = {
+				id: uniqueId,
+				text: this.text,
+				date: new Date()
+			}
+			// add log 
+			this.logServise.addLog(newLog);
+		}
+		else {
+			console.log("Something went wrong id was not generated");
+
+		}
 	}
 
 }
