@@ -2,6 +2,6 @@
 	<li *ngFor="let log of logs" class="list-group-item justify-content-between d-flex align-items-center">
 		<a href="#" (click)="onSelect(log)">{{ log.text }}</a>
 		<span class="log-date">{{ log.date | date: 'short' }}</span>
-		<i class="fa fa-times"></i>
+		<i class="fa fa-times" (click)="onDelete(log)"></i>
 	</li>
 </ul>
