@@ -9,7 +9,7 @@
 				<input type="text" class="form-control" aria-label="Add your log"  name="text" [(ngModel)]="text" aria-describedby="inputGroup-sizing-sm">
 			</div>
 			<button type="submit" class="btn btn-outline-success mr-1" [disabled]=!this.text>Add log</button>
-			<button type="button" class="btn btn-outline-warning" [hidden]=!this.text>Clear</button>
+			<button type="button" class="btn btn-outline-warning" [hidden]=!this.text (click)="clearState()">Clear</button>
 		</form>
 	</div>
 </div>
